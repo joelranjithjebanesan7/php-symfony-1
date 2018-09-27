@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="/static/js/ckeditor/ckeditor/ckeditor.js"></script>
+    <title>CKEDITOR</title>
+</head>
+<body>
+  <div class="row">
+    <div class="col-lg-3">
+            Create
+    </div>
+  
+	
+<!-- creating a text area for my editor in the form -->
+    <textarea id="myeditor" name="myeditor" id="myeditor"></textarea>
+  </div>
+<!-- creating a CKEditor instance called myeditor -->
+	
+<script type="text/javascript">
+    //resize CKEditor with customised height and width
+    CKEDITOR.replace('myeditor',{
+	width: "400px",
+        height: "100px"
+    
+     },
+);
+</script>
+
+    <!-- make sure the src path points to your copied ckeditor folder -->
+
+</body>
+</html>
