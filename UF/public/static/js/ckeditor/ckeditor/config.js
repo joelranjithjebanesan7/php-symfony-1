@@ -29,8 +29,24 @@ CKEDITOR.editorConfig = function( config ) {
 
 	// Remove some buttons provided by the standard plugins, which are
 	// not needed in the Standard(s) toolbar.
-	config.removeButtons = 'Source,Print,Save,NewPage,Preview,Templates,Cut,Copy,Undo,Find,Redo,Paste,PasteText,PasteFromWord,Replace,SelectAll,Scayt,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,CopyFormatting,About,Maximize,TextColor,Styles,BGColor,BidiRtl,NumberedList,Outdent,Blockquote,Link,BidiLtr,Flash,Table,Anchor,Unlink,BulletedList,Indent,CreateDiv,Language,HorizontalRule,Smiley,SpecialChar,PageBreak,Iframe,RemoveFormat,Subscript,Superscript,Format,Font,ShowBlocks';
-
+	config.removeButtons = 'Source,Print,NewPage,Preview,Templates,Cut,Copy,Undo,Find,Redo,Paste,PasteText,PasteFromWord,Replace,SelectAll,Scayt,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,CopyFormatting,About,Maximize,TextColor,Styles,BGColor,BidiRtl,NumberedList,Outdent,Blockquote,Link,BidiLtr,Flash,Table,Anchor,Unlink,BulletedList,Indent,CreateDiv,Language,HorizontalRule,Smiley,SpecialChar,PageBreak,Iframe,RemoveFormat,Subscript,Superscript,Format,Font,ShowBlocks';
+	CKEDITOR.plugins.registered['save']=
+	{
+		 init : function( editor )
+		 {
+			var command = editor.addCommand( 'save', 
+			   {
+				  modes : { wysiwyg:1, source:1 },
+				  exec : function( editor ) {
+					 var fo=editor.element.$.form;
+					 editor.updateElement();
+					 rxsubmit(fo);
+				  }
+			   }
+			);
+			editor.ui.addButton( 'Save',{label : 'My Save',command : 'save'});
+		 }
+	  }
 
 	// Set the most common block elements.
 	config.format_tags = 'p;h1;h2;h3;pre';

@@ -4,20 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <script src ="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
     <script src="/static/js/ckeditor/ckeditor/ckeditor.js"></script>
     <title>CKEDITOR</title>
 </head>
 <body>
   <div class="row">
-    <div class="col-lg-3">
+    <div class="col-sm-6">
             Create
     </div>
-  
-	
-<!-- creating a text area for my editor in the form -->
+  </div>
+  <div class="row">
+    <div class="col-sm-1"></div>
+    <div>
+	<form id="myform" name="myform" action="{{ path('form_user_save') }}" method="post">
+        <textarea id="myeditor" name="myeditor" ></textarea>
+        <textarea name="question" id="idQuestion" style="display: none;"></textarea>
+        <a href="#" class="btn btn-primary" id="submit">Submit</a>
+    </form>
+    </div>
+  </div>    
+
+<!-- creating a text area for my editor in the form 
     <textarea id="myeditor" name="myeditor" id="myeditor"></textarea>
   </div>
-<!-- creating a CKEditor instance called myeditor -->
+S creating a CKEditor instance called myeditor -->
 	
 <script type="text/javascript">
     //resize CKEditor with customised height and width
@@ -26,7 +39,16 @@
         height: "100px"
     
      },
+     
 );
+    $(document).ready(function(){
+        $("#submit").click(function(){
+            var editorData = CKEDITOR.instances['myeditor'].getData();
+            $('#idQuestion').val(editorData);
+            $('#myform').submit();
+            console.log(editorData);
+        })
+    });
 </script>
 
     <!-- make sure the src path points to your copied ckeditor folder -->
